@@ -17,6 +17,6 @@ A simple UI Automation project built to demonstrate the use of pure Selenium and
   $ docker-compose up
   ```
 
-- # Report steps demo
+- ## Report steps demo
 
  <img src="reportdemo.png" width="700"/>
