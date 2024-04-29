@@ -53,10 +53,8 @@ public class AddItemToCartTest extends BaseTestClass {
         logStep("Checking cart has only 1 item");
         assertEquals(1, cartPage.getCartItemListSize());
 
-        logStep("Looking for an item in cart with title: " + itemTitle);
-        cartItemElement = getCartItemByTitle(cartPage, itemTitle);
-
         logStep("Checking item in cart has the same title as the item we added: " + itemTitle);
+        cartItemElement = getCartItemByTitle(cartPage, itemTitle);
         assertEquals(cartItemElement.getCartItemTitle(), itemTitle);
 
         logStep("Checking item in cart has the same price as the item we added: " + itemPrice);
