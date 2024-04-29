@@ -29,7 +29,6 @@ public class LoginPage extends BasePage {
         setUserName(userType.getUserName());
         setUserPassword(userType.getUserPassword());
         clickLoginButton();
-        InventoryPage inventoryPage = new InventoryPage();
-        return inventoryPage;
+        return new InventoryPage();
     }
 }

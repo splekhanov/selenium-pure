@@ -1,7 +1,6 @@
 package selenium.pure.base;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.Optional;
 

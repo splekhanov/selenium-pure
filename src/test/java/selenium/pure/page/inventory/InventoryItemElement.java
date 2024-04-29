@@ -8,20 +8,16 @@ public class InventoryItemElement extends BasePage {
 
     private final WebElement item;
 
-    private final By itemName = By.xpath("//*[@data-test='inventory-item-name']");
-    private final By itemImage = By.xpath("//*[@data-test='inventory-item-sauce-labs-backpack-img']");
     private final By itemPrice = By.xpath("//*[@data-test='inventory-item-price']");
     private final By itemAddToCartButton = By.xpath("//button[text()='Add to cart']");
     private final By itemRemoveFromCartButton = By.xpath("//button[text()='Remove']");
-    private final By itemDescription = By.xpath("//*[@data-test='inventory-item-desc']");
 
     public InventoryItemElement(final WebElement element) {
         this.item = element;
     }
 
     public String getItemPrice() {
-        String price = item.findElement(itemPrice).getText();
-        return price;
+        return item.findElement(itemPrice).getText();
     }
 
     public void addItemToCart() {

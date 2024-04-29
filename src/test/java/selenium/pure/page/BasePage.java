@@ -24,10 +24,6 @@ public class BasePage {
         return DriverFactory.get();
     }
 
-    public String getTitle() {
-        return driver().getTitle();
-    }
-
     public WebElement getElement(By locator) {
         return driver().findElement(locator);
     }

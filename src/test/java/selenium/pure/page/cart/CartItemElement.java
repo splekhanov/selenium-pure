@@ -17,8 +17,7 @@ public class CartItemElement extends BasePage {
     }
 
     public String getCartItemPrice() {
-        String price = item.findElement(cartItemPrice).getText();
-        return price;
+        return item.findElement(cartItemPrice).getText();
     }
 
     public String getCartItemTitle() {

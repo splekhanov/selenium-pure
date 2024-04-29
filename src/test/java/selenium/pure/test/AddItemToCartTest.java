@@ -14,7 +14,7 @@ import selenium.pure.page.login.LoginPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AddItemToCartTestPage extends BaseTestClass {
+public class AddItemToCartTest extends BaseTestClass {
 
     private LoginPage loginPage;
     private InventoryPage inventoryPage;
