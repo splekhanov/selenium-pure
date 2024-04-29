@@ -1,6 +1,7 @@
 package selenium.pure.base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
@@ -106,5 +107,10 @@ public class BaseTestClass {
             //e.printStackTrace();
         }
         return hostURL;
+    }
+
+    @Step("{message}")
+    public void logStep(String message) {
+        //
     }
 }

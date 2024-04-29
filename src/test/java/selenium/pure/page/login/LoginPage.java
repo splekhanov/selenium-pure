@@ -1,6 +1,5 @@
 package selenium.pure.page.login;
 
-import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import selenium.pure.data.user.UserType;
 import selenium.pure.page.BasePage;
@@ -26,7 +25,6 @@ public class LoginPage extends BasePage {
         getElement(loginButton).click();
     }
 
-    @Step("Log in by {0} user")
     public InventoryPage login(UserType userType) {
         setUserName(userType.getUserName());
         setUserPassword(userType.getUserPassword());
