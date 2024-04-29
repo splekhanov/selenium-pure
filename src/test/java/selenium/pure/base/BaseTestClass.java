@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class BaseTestClass {
@@ -39,7 +40,7 @@ public class BaseTestClass {
         properties = new Properties();
         try {
             properties.load(new InputStreamReader(Objects.requireNonNull(BaseTestClass.class.getClassLoader()
-                    .getResourceAsStream("config.properties")), "UTF-8"));
+                    .getResourceAsStream("config.properties")), StandardCharsets.UTF_8));
         } catch (IOException e) {
             logger.error("Can't load 'config.properties'");
         }
