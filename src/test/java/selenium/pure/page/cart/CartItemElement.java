@@ -1,5 +1,6 @@
 package selenium.pure.page.cart;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import selenium.pure.page.BasePage;
@@ -24,6 +25,7 @@ public class CartItemElement extends BasePage {
         return item.findElement(cartItemName).getText();
     }
 
+    @Step("Removing item from cart")
     public void removeItemFromCart() {
         item.findElement(itemRemoveFromCartButton).click();
     }

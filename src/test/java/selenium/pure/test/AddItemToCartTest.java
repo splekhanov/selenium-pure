@@ -1,5 +1,6 @@
 package selenium.pure.test;
 
+import io.qameta.allure.Allure;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,6 +15,7 @@ import selenium.pure.page.login.LoginPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@DisplayName("Item can be added to the cart")
 public class AddItemToCartTest extends BaseTestClass {
 
     private LoginPage loginPage;
@@ -30,8 +32,7 @@ public class AddItemToCartTest extends BaseTestClass {
     }
 
     @Test
-    @DisplayName("Item can be added to the cart")
-    public void SearchTest() {
+    public void AddingItemToCartTest() {
         inventoryPage = loginPage.login(UserType.STANRARD);
         inventoryItemElement = inventoryPage.getInventoryItemByTitle(itemTitle);
 
@@ -39,10 +40,17 @@ public class AddItemToCartTest extends BaseTestClass {
 
         inventoryItemElement.addItemToCart();
         cartPage = inventoryPage.openCart();
-        assertEquals(1, cartPage.getCartItemListSize(), "Cart has 1 item");
+
+        Allure.step("Checking cart has only 1 item", step -> {
+            assertEquals(1, cartPage.getCartItemListSize());
+        });
         cartItemElement = cartPage.getCartItemByTitle(itemTitle);
-        assertEquals(cartItemElement.getCartItemTitle(), itemTitle, "Item in cart has the same title as item we added");
-        assertEquals(cartItemElement.getCartItemPrice(), itemPrice, "Item in cart has the same price as item we added");
+        Allure.step("Checking item in cart has the same title as the item we added", step -> {
+            assertEquals(cartItemElement.getCartItemTitle(), itemTitle);
+        });
+        Allure.step("Checking item in cart has the same price as the item we added", step -> {
+            assertEquals(cartItemElement.getCartItemPrice(), itemPrice);
+        });
     }
 
     @AfterEach

@@ -1,5 +1,6 @@
 package selenium.pure.page.inventory;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import selenium.pure.page.MainPage;
@@ -21,6 +22,7 @@ public class InventoryPage extends MainPage {
         return getElement(inventoryList).findElements(inventoryItem);
     }
 
+    @Step("Getting inventory item with title {0}")
     public InventoryItemElement getInventoryItemByTitle(String itemTitle) {
         List<WebElement> items = collectInventoryItems();
         InventoryItemElement inventoryItemElement;

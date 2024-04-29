@@ -1,5 +1,6 @@
 package selenium.pure.page.cart;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import selenium.pure.page.BasePage;
@@ -21,6 +22,7 @@ public class CartPage extends BasePage {
         return getElement(cartItemList).findElements(cartItem);
     }
 
+    @Step("Getting cart item with title {0}")
     public CartItemElement getCartItemByTitle(String itemTitle) {
         List<WebElement> items = collectCartItems();
         CartItemElement cartItemElement;
