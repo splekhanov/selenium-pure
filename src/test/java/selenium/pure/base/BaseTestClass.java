@@ -53,15 +53,16 @@ public class BaseTestClass {
     private void startDriver() {
         WebDriver driver;
         WebDriverManager.chromedriver().setup();
+        logger.info("env is " + env);
 
         if(env == null) {
+            logger.info("Starting local WebDriver...");
             driver = new ChromeDriver(getChromeOptions());
             DriverFactory.set(driver);
-            logger.info("Starting local WebDriver...");
         } else {
+            logger.info("Starting remote WebDriver...");
             driver = new RemoteWebDriver(getGridHubUrl(), getChromeOptions());
             DriverFactory.set(driver);
-            logger.info("Starting remote WebDriver...");
         }
     }
 
