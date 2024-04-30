@@ -1,0 +1,45 @@
+version: '3'
+services:
+  selenoid:
+    image: "aerokube/selenoid:1.11.2"
+    network_mode: bridge
+    container_name: selenoid
+    ports:
+      - "4444:4444"
+    volumes:
+      - ".:/etc/selenoid/" # assumed current dir contains browsers.json
+      - "./target:/output"
+      - "//var/run/docker.sock:/var/run/docker.sock"
+  selenoid-ui:
+    image: "aerokube/selenoid-ui:latest"
+    network_mode: bridge
+    container_name: selenoid-ui
+    links:
+      - selenoid
+    ports:
+      - "8083:8080"
+    command: ["--selenoid-uri", "http://selenoid:4444"]
+  chrome_124.0:
+    image: "selenoid/vnc_chrome:124.0"
+    container_name: chrome_124.0
+    links:
+      - selenoid
+      - selenoid-ui
+    depends_on:
+      - selenoid
+      - selenoid-ui
+    network_mode: bridge
+    volumes:
+      - "/dev/shm:/dev/shm"
+  jenkins:
+    image: jenkins/jenkins:lts
+    network_mode: bridge
+    privileged: true
+    user: root
+    ports:
+      - "8081:8080"
+      - "50000:50000"
+    container_name: jenkins
+    volumes:
+      - ~/jenkins:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
