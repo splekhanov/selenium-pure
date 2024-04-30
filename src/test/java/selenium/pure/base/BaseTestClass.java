@@ -60,7 +60,7 @@ public class BaseTestClass {
             driver = new ChromeDriver(getChromeOptions());
             DriverFactory.set(driver);
         } else {
-            logger.info("Starting remote WebDriver...");
+            logger.info("Starting remote WebDriver at " + getGridHubUrl());
             driver = new RemoteWebDriver(getGridHubUrl(), getChromeOptions());
             DriverFactory.set(driver);
         }
