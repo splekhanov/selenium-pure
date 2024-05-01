@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+
+    tools {
+        maven "maven"
+        jdk "java"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                // Get some code from a GitHub repository
+                git 'https://github.com/splekhanov/selenium-pure.git'
+
+                // Check Java version
+                sh "java -version"
+
+                // Check Maven version
+                sh "mvn -v"
+
+                // Run Maven on a Unix agent.
+                sh "mvn -Denv=selenoid clean verify"
+
+            }
+
+            post {
+                // If Maven was able to run the tests, even if some of the test
+                // failed, record the test results and archive the jar file.
+                always {
+                    script {
+                        allure([
+                            includeProperties: false,
+                            jdk: '',
+                            properties: [],
+                            reportBuildPolicy: 'ALWAYS',
+                            results: [[path: 'target/allure-results']]
+                        ])
+                    }
+                }
+            }
+        }
+    }
+}

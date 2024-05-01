@@ -1,18 +1,25 @@
 version: '3'
+networks:
+  selenoid:
+    external:
+      name: selenoid # network should be previously created
 services:
   selenoid:
     image: "aerokube/selenoid:1.11.2"
-    network_mode: bridge
+    networks:
+      - selenoid
     container_name: selenoid
     ports:
       - "4444:4444"
     volumes:
       - ".:/etc/selenoid/" # assumed current dir contains browsers.json
       - "./target:/output"
-      - "//var/run/docker.sock:/var/run/docker.sock"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    command: ["-container-network", "selenoid"] # flag for created network
   selenoid-ui:
     image: "aerokube/selenoid-ui:latest"
-    network_mode: bridge
+    networks:
+      - selenoid
     container_name: selenoid-ui
     links:
       - selenoid
@@ -28,12 +35,14 @@ services:
     depends_on:
       - selenoid
       - selenoid-ui
-    network_mode: bridge
+    networks:
+      - selenoid
     volumes:
       - "/dev/shm:/dev/shm"
   jenkins:
     image: jenkins/jenkins:lts
-    network_mode: bridge
+    networks:
+      - selenoid
     privileged: true
     user: root
     ports:
