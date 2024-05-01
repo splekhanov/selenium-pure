@@ -55,7 +55,7 @@ public class BaseTestClass {
         WebDriverManager.chromedriver().setup();
         logger.info("env is " + env);
 
-        if(env == null) {
+        if(env.equals("selenoid")) {
             logger.info("Starting local WebDriver...");
             driver = new ChromeDriver(getChromeOptions());
             DriverFactory.set(driver);

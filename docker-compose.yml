@@ -2,7 +2,7 @@ version: '3'
 networks:
   selenoid:
     external:
-      name: selenoid # network should be previously created
+      name: selenoid # assumed network has been previously created "docker network create selenoid"
 services:
   selenoid:
     image: "aerokube/selenoid:1.11.2"
@@ -26,19 +26,6 @@ services:
     ports:
       - "8083:8080"
     command: ["--selenoid-uri", "http://selenoid:4444"]
-  chrome_124.0:
-    image: "selenoid/vnc_chrome:124.0"
-    container_name: chrome_124.0
-    links:
-      - selenoid
-      - selenoid-ui
-    depends_on:
-      - selenoid
-      - selenoid-ui
-    networks:
-      - selenoid
-    volumes:
-      - "/dev/shm:/dev/shm"
   jenkins:
     image: jenkins/jenkins:lts
     networks:
