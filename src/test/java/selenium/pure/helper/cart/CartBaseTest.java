@@ -11,21 +11,16 @@ public class CartBaseTest extends BaseTestClass {
 
     public static CartItemElement getCartItemByTitle(CartPage cartPage, String itemTitle) {
         List<WebElement> items = cartPage.collectCartItems();
-        CartItemElement cartItemElement;
-        int itemsAmount;
 
         if (items.isEmpty()) {
             throw new RuntimeException("Couldn't found any items. Cart item list is empty");
-        } else {
-            itemsAmount = items.size();
         }
 
-        for (int i = 0; i <= itemsAmount; i++) {
-            CartItemElement item = new CartItemElement(items.get(i));
+        for (WebElement itemWebElement : items) {
+            CartItemElement item = new CartItemElement(itemWebElement);
             String t = item.getCartItemTitle();
             if (t.equals(itemTitle)) {
-                cartItemElement = new CartItemElement(items.get(i));
-                return cartItemElement;
+                return item;
             }
         }
         throw new RuntimeException("Couldn't found item with title " + itemTitle);

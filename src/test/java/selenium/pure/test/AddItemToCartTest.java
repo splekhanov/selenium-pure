@@ -34,8 +34,8 @@ public class AddItemToCartTest extends BaseTestClass {
 
     @Test
     public void AddingItemToCartTest() {
-        logStep("Logging in with user: " + UserType.STANRARD);
-        inventoryPage = loginPage.login(UserType.STANRARD);
+        logStep("Logging in with user: " + UserType.STANDARD);
+        inventoryPage = loginPage.login(UserType.STANDARD);
 
         logStep("Looking for an item in inventory with title: " + itemTitle);
         inventoryItemElement = getInventoryItemByTitle(inventoryPage, itemTitle);
