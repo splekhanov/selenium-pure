@@ -11,21 +11,16 @@ public class InventoryBaseTest extends BaseTestClass {
 
     public static InventoryItemElement getInventoryItemByTitle(InventoryPage inventoryPage, String itemTitle) {
         List<WebElement> items = inventoryPage.collectInventoryItems();
-        InventoryItemElement inventoryItemElement;
-        int itemsAmount;
 
         if (items.isEmpty()) {
             throw new RuntimeException("Couldn't found any items. Inventory item list is empty");
-        } else {
-            itemsAmount = items.size();
         }
 
-        for (int i = 0; i <= itemsAmount; i++) {
-            InventoryItemElement item = new InventoryItemElement(items.get(i));
+        for (WebElement itemWebElement : items) {
+            InventoryItemElement item = new InventoryItemElement(itemWebElement);
             String t = item.getInventoryItemTitle();
             if (t.equals(itemTitle)) {
-                inventoryItemElement = new InventoryItemElement(items.get(i));
-                return inventoryItemElement;
+                return item;
             }
         }
         throw new RuntimeException("Couldn't found item with title " + itemTitle);
